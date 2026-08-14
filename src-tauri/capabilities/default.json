@@ -1,0 +1,8 @@
+{
+  "identifier": "default",
+  "description": "Izin default untuk window utama ADM Premium: command inti Tauri. Command custom (save_binary_file, open_path) yang dipakai tombol Export Excel & Cetak PDF tidak perlu didaftarkan di sini karena Tauri v2 otomatis mengizinkan semua command yang didaftarkan lewat invoke_handler/generate_handler! di main.rs.",
+  "windows": ["main"],
+  "permissions": [
+    "core:default"
+  ]
+}

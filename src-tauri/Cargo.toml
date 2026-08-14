@@ -1,0 +1,28 @@
+[package]
+name = "adm-premium-desktop"
+version = "5.0.0"
+description = "ADM Premium - Sistem Administrasi Guru"
+authors = ["Jacky Ardiyan, S.Pd"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# Dialog "Simpan Sebagai" native + tulis file ke disk. Dipakai supaya tombol
+# "Export Excel" & "Cetak PDF" bisa benar-benar menyimpan file: window.open()/
+# download blob dari JS tidak berfungsi di dalam WebView Tauri (WebView2 dsb),
+# jadi penyimpanan file harus lewat command Rust ini (lihat save_binary_file
+# & open_path di src/main.rs, dipanggil dari simpanFileBiner() di src/index.html).
+rfd = "0.15"
+# Membuka file (mis. PDF yang baru disimpan) dengan aplikasi default sistem,
+# supaya "Cetak PDF" tetap bisa lanjut ke dialog print bawaan PDF viewer user.
+open = "5"
+base64 = "0.22"
+
+[[bin]]
+name = "adm-premium-desktop"
+path = "src/main.rs"

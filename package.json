@@ -1,0 +1,12 @@
+{
+  "name": "adm-premium-desktop",
+  "private": true,
+  "version": "5.0.0",
+  "description": "ADM Premium - Sistem Administrasi Guru (aplikasi desktop, dibungkus dari web app dengan Tauri)",
+  "scripts": {
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.1.0"
+  }
+}

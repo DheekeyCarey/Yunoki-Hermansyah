@@ -1,0 +1,69 @@
+name: Build Aplikasi Desktop ADM Premium
+
+# Build otomatis jalan tiap kali ada tag versi dipush (contoh: git tag v1.0.0 && git push --tags)
+# atau bisa dipicu manual lewat tab "Actions" di GitHub (tombol "Run workflow").
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "windows-latest"
+            name: "Windows"
+          - platform: "ubuntu-22.04"
+            name: "Linux"
+          - platform: "macos-latest"
+            name: "macOS"
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependency sistem Linux (untuk WebKitGTK)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf build-essential curl wget file libssl-dev libgtk-3-dev
+
+      - name: Install dependency npm
+        run: npm install
+
+      - name: Build & buat installer (Tauri)
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "ADM Premium ${{ github.ref_name }}"
+          releaseBody: "Instalasi otomatis untuk ${{ matrix.name }}. Unduh file yang sesuai dengan sistem operasi Anda di bagian Assets di bawah."
+          releaseDraft: true
+          prerelease: false
+
+      - name: Upload artifact build (untuk dilihat tanpa tag/release)
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: adm-premium-${{ matrix.name }}
+          path: |
+            src-tauri/target/release/bundle/**/*.msi
+            src-tauri/target/release/bundle/**/*.exe
+            src-tauri/target/release/bundle/**/*.dmg
+            src-tauri/target/release/bundle/**/*.app
+            src-tauri/target/release/bundle/**/*.AppImage
+            src-tauri/target/release/bundle/**/*.deb
+            src-tauri/target/release/bundle/**/*.rpm
