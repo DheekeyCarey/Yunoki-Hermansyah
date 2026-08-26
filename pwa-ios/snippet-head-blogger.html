@@ -1,0 +1,45 @@
+<!-- ================================================================
+     SNIPPET PWA UNTUK BLOGGER — SIAKAD
+     Tempel blok ini persis SEBELUM tag </head> di:
+     Blogger Dashboard > Tema > Edit HTML
+     ================================================================
+     GANTI setiap URL "GANTI_DENGAN_URL_..." di bawah dengan URL hasil
+     upload gambar ke Blogger (lihat README.md langkah "Upload icon").
+     ================================================================ -->
+
+<!-- Warna tema browser & status bar -->
+<meta name="theme-color" content="#1e63e0"/>
+
+<!-- Ini yang PALING PENTING untuk iOS: bikin blog terasa seperti app -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="ADM Premium"/>
+
+<!-- Icon yang dipakai saat "Add to Home Screen" di iOS -->
+<link rel="apple-touch-icon" sizes="180x180" href="GANTI_DENGAN_URL_apple-touch-icon.png"/>
+<link rel="apple-touch-icon" sizes="167x167" href="GANTI_DENGAN_URL_apple-touch-icon-167.png"/>
+<link rel="apple-touch-icon" sizes="152x152" href="GANTI_DENGAN_URL_apple-touch-icon-152.png"/>
+<link rel="apple-touch-icon" sizes="120x120" href="GANTI_DENGAN_URL_apple-touch-icon-120.png"/>
+
+<!-- Favicon biasa (browser tab) -->
+<link rel="icon" type="image/png" sizes="32x32" href="GANTI_DENGAN_URL_favicon-32.png"/>
+
+<!-- Web App Manifest (dipakai Android/Chrome, & iOS versi baru sebagian) -->
+<link rel="manifest" href="GANTI_DENGAN_URL_manifest.webmanifest"/>
+
+<!-- ================================================================
+     Opsional: script kecil supaya saat sudah ditambahkan ke Home
+     Screen, semua link internal tetap terbuka DI DALAM app (bukan
+     lompat balik ke Safari). Aman ditinggal terpasang.
+     ================================================================ -->
+<script>
+if (window.navigator.standalone) {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a');
+    if (a && a.href && a.href.indexOf(location.origin) === 0 && a.target !== '_blank') {
+      e.preventDefault();
+      location.href = a.href;
+    }
+  });
+}
+</script>

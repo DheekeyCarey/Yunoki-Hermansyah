@@ -1,0 +1,39 @@
+name: Build ADM Premium Desktop
+
+# Trigger MANUAL: buka tab "Actions" di repo GitHub → pilih workflow ini
+# di sidebar kiri → klik tombol "Run workflow".
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependensi Node
+        run: npm install
+
+      - name: Build aplikasi (Tauri)
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload hasil build sebagai artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: siakad-desktop-windows
+          path: |
+            src-tauri/target/release/bundle/**/*.exe
+            src-tauri/target/release/bundle/**/*.msi
+          if-no-files-found: error
