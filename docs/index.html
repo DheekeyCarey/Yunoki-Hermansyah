@@ -1,10 +1,47 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>ADM Premium - PWA Assets</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"/>
+<title>ADM Premium</title>
+
+<meta name="theme-color" content="#1e63e0"/>
+
+<!-- Wajib untuk iOS: bikin halaman ini terasa seperti app saat dibuka dari Home Screen -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="ADM Premium"/>
+
+<!-- Icon yang dipakai saat "Add to Home Screen" di iOS -->
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"/>
+<link rel="apple-touch-icon" sizes="167x167" href="icons/apple-touch-icon-167.png"/>
+<link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-152.png"/>
+<link rel="apple-touch-icon" sizes="120x120" href="icons/apple-touch-icon-120.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png"/>
+
+<!-- Web App Manifest (Android/Chrome, & sebagian iOS baru) -->
+<link rel="manifest" href="manifest.webmanifest"/>
+
+<style>
+  html, body { margin:0; padding:0; height:100%; width:100%; overflow:hidden; background:#1e63e0; }
+  iframe { position:fixed; top:0; left:0; width:100%; height:100%; border:0; }
+</style>
 </head>
 <body>
-<p>Folder ini hanya berisi aset PWA (manifest, icon) untuk konfigurasi Add to Home Screen di iOS. Tidak ada halaman untuk ditampilkan di sini.</p>
+
+<iframe src="https://yunokihermansyah.blogspot.com/" allow="fullscreen" title="ADM Premium"></iframe>
+
+<script>
+  // Supaya link internal yang dibuka di dalam iframe tetap di dalam app (bukan lompat ke Safari)
+  if (window.navigator.standalone) {
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a');
+      if (a && a.target === '_blank') {
+        e.preventDefault();
+      }
+    }, true);
+  }
+</script>
+
 </body>
 </html>

@@ -1,25 +1,25 @@
 {
   "name": "ADM Premium",
   "short_name": "ADM Premium",
-  "start_url": "https://yunokihermansyah.blogspot.com/?utm_source=pwa_home_screen",
-  "scope": "https://yunokihermansyah.blogspot.com/",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#1e63e0",
   "theme_color": "#1e63e0",
   "icons": [
     {
-      "src": "https://yunokihermansyah.blogspot.com/icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://yunokihermansyah.blogspot.com/icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "https://yunokihermansyah.blogspot.com/icon-512-maskable.png",
+      "src": "icons/icon-512-maskable.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
